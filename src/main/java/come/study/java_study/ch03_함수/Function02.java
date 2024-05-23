@@ -15,18 +15,19 @@ public class Function02 {
         System.out.println("num2 : " + num2);
     }
 
-    //매개변수 X, 리턴 O
+    //매개변수 X, 리턴 O (getter, setter로 주로 활용 됨)
     String fx03() {
         String call = "매개변수가 없고 리턴이 있는 함수 호출";
         return call;
     }
 
-    //매개변수 O, 리턴 O
+    String getData() {
+        return "데이터";
+    }
 
+    //매개변수 O, 리턴 O
     String 빙수만들기 (String 재료, int count) {
         return 재료 + "빙수 : " + count + "개";
     }
-
-
 
 }
