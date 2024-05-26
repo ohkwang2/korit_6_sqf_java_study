@@ -40,27 +40,24 @@ public class ArrayService {
                     System.out.println("수정할 이름을 입력하세요.");
                     String modifyName = null;
                     int modifyIndex = 0;
-                    String inputName = scanner.nextLine();
+                    String modifyInputName = scanner.nextLine();
                     for(int i = 0; i < names.length; i++) {
-                        if(names[i].equals(inputName)) {
+                        if(names[i].equals(modifyInputName)) {
                             System.out.println("이름을 수정 할 수 있습니다.");
                             modifyIndex = i;
                             System.out.println("수정 할 이름을 입력하세요.");
                             modifyName = scanner.nextLine();
 //                            System.out.println("수정할 이름 인덱스 : " + modifyIndex);
 //                            System.out.println("수정할 이름 : " + modifyName);
-                            String[] modifiedNames = new String[names.length];
                             for(int j = 0; j< names.length; j++) {
                                 if(j == modifyIndex) {
-                                    modifiedNames[j] = modifyName;
+                                    names[j] = modifyName;
                                     continue; // continue가 없으면 대체 뒤에 내용 대체 안 하고 끝나버림
                                 }
-                                modifiedNames[j] = names[j];
+                                names[j] = names[j];
                             }
-                            names = modifiedNames;
-                            modifiedNames = null;
                             System.out.println("이름 수정 완료");
-                            System.out.println("수정전 이름 : " + inputName + ", 수정 후 이름 : " + modifyName);
+                            System.out.println("수정전 이름 : " + modifyInputName + ", 수정 후 이름 : " + modifyName);
                             break;
                         }
                     }
@@ -71,6 +68,50 @@ public class ArrayService {
                     break;
                 case "3":
                     System.out.println("[이름 삭제]");
+                    System.out.println("삭제할 이름을 입력하세요.");
+                    String deleteName = null;
+                    int deleteIndex = 0;
+                    String deleteInputName = scanner.nextLine();
+                    for (int i = 0; i < names.length; i++) {
+                        if(names[i].equals(deleteInputName)) {
+                            System.out.println("이름을 삭제할 수 있습니다.");
+                            deleteIndex = i;
+                            deleteName = deleteInputName;
+                            boolean isRunDelete = true;
+                            while(isRunDelete) {
+                                System.out.println("이름을 삭제하시려면 'Y'를 아니면 'N'을 눌러주세요.");
+                                String deleteConfirm = scanner.nextLine();
+                                switch (deleteConfirm) {
+                                    case "Y":
+                                        String[] deletedNames = new String[names.length-1];
+                                        for(int j = 0; j < names.length; j++) {
+                                            if(j < deleteIndex) {
+                                                deletedNames[j] = names[j];
+                                            } else if (j > deleteIndex) {
+                                            deletedNames[j-1] = names[j];
+                                            }
+                                        }
+                                        names = deletedNames;
+                                        deletedNames = null;
+                                        isRunDelete = false;
+                                        System.out.println("이름 삭제가 완료되었습니다.");
+                                        break;
+                                    case "N":
+                                        isRunDelete = false;
+                                        break;
+                                    default:
+                                        System.out.println("잘못 입력하셨습니다. 다시 입력해주세요.");
+                                        isRunDelete = true;
+                                        break;
+                                }
+                            }
+                        }
+                        System.out.println();
+                    }
+                    if(deleteName == null) {
+                        System.out.println("일치하는 이름이 없습니다. 다시 검색해주세요.");
+                    }
+                    System.out.println();
                     break;
                 case "4":
                     System.out.println("[이름 찾기]");
