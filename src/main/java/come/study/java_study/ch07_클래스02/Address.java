@@ -2,39 +2,22 @@ package come.study.java_study.ch07_클래스02;
 
 public class Address {
 
-    String res = "";
-
-    public Address(String res) {
-        this.res = res;
-    }
-
     public static void main(String[] args) {
-
-        Address ad1 = new Address("kim");
-        Address ad2 = new Address("Nam");
         String a1 = "kim";
-        String a2 = "Nam";
-        String a3 = "kim";
-        String a4 = new String("kim");
+        String a2 = "kim";
+        String a3 = new String("kim");
 
-        System.out.println(ad1);
-        System.out.println(System.identityHashCode(ad1));
-        System.out.println(a1);
-        System.out.println(System.identityHashCode(a1));
+        System.out.println("변수 a1의 값: " + a1);
+        System.out.println("변수 a2의 값: " + a2);
+        System.out.println("변수 a3의 값: " + a3);
+        System.out.println("변수 a1의 Hash값: " + System.identityHashCode(a1));
+        System.out.println("변수 a2의 Hash값: " + System.identityHashCode(a2));
+        System.out.println("변수 a3의 Hash값: " + System.identityHashCode(a3));
 
-        System.out.println("=====================");
-
-        System.out.println(ad2);
-        System.out.println(System.identityHashCode(ad2));
-        System.out.println(a2);
-        System.out.println(System.identityHashCode(a2));
-
-        System.out.println("=====================");
-
-        System.out.println(System.identityHashCode(a3));
-        System.out.println(a4);
-        System.out.println(System.identityHashCode(a4));
-
+        System.out.println("==============");
+        System.out.println("변수 a1과 a2의 값 비교: " + (a1 == a2));
+        System.out.println("변수 a1과 a3의 값 비교: " + (a1 == a3));
+        System.out.println("변수 a2과 a3의 값 비교: " + (a2 == a3));
     }
 
 }

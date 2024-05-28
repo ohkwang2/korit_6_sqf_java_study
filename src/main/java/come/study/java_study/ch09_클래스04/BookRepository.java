@@ -5,13 +5,22 @@ import java.awt.print.Book;
 // 저장소 -> CRUD
 public class BookRepository {
 
+    private int bookId;
     private BookEntity[] books;
 
+    /* 도서 CRUD 기본 생성자 _ 2024.05.28*/
     // BookRepository가 생성됨과 동시에 기본 정보를 넣어놓기 위함.
     public BookRepository() {
         books = new BookEntity[0];
     }
 
+    /* 도서 Id 자동 생성 기능 _ 2024.05.28*/
+    public int autoIncrementBookId() {
+        // 실행되면 자동으로 bookId를 1씩 늘리기 위함
+        return ++bookId;
+    }
+
+    /* 도서 배열 확장 기능 _ 2024.05.28*/
     // 기능으로 따지자면 배열을 늘리는 기능 (해당 클래스 내에서만 쓰기 때문에 private으로 생성
     private void extendBooks() {
         // 기본 배열보다 크기가 하나 더 큰 배열을 생성
@@ -27,11 +36,13 @@ public class BookRepository {
         newBooks = null;
     }
 
+    /* 도서 배열 마지막 인덱스 가져오기 기능 _ 2024.05.28*/
     // 마지막 인덱스를 가져오는 함수
     private int getLastIndex() {
         return books.length - 1;
     }
 
+    /* 확장된 배열의 마지막 인덱스에 새로운 객체 대입 기능 _ 2024.05.28*/
     // 기능으로 따지면 새로운 배열에 객체 대입
     public void saveBook(BookEntity book) {
         // 배열 확장
@@ -41,7 +52,8 @@ public class BookRepository {
         books[getLastIndex()] = book;
     }
 
-    // 단건 조회
+    /* bookId 기반 단건 조회 기능 _ 2024.05.28*/
+    // 단건 조회 (중복이 허용 될 경우 가장 처음 찾은 데이터 1개만 return)
     public BookEntity findBookByBookId(int bookId) {
         BookEntity findBook = null;
         // 선형 탐색
@@ -54,7 +66,8 @@ public class BookRepository {
         return findBook;
     }
 
-    // 단건 조회 (책 이름이 중복이 허용 될 경우 같은 이름의 책 중 가장 빠른 책 한 권만 조회됨)
+    /* bookName 기반 단건 조회 기능 _ 2024.05.28*/
+    // 단건 조회 (중복이 허용 될 경우 가장 처음 찾은 데이터 1개만 return)
     public BookEntity findBookByName(String bookName) {
         BookEntity findBook = null;
         //선형탐색
@@ -68,6 +81,7 @@ public class BookRepository {
         return findBook;
     }
 
+    /* 조회할 데이터의 객체 배열 공간의 필요한 사이즈를 찾아 반환하는 기능 _ 2024.05.28*/
     private int getNewArraySize(int option, String searchText) {
         int newArraySize = 0;
 
@@ -81,8 +95,8 @@ public class BookRepository {
                             || book.getPublisher().contains(searchText)) {
                         newArraySize++;
                     }
-                    break;
                 }
+                break;
             case 2: // 도서명 검색
                 for(BookEntity book : books) {
                     if(book.getBookName().contains(searchText)) {
@@ -108,16 +122,18 @@ public class BookRepository {
         return newArraySize;
     }
 
-    // 다건조회
+    /* 입력된 데이터를 검색조건에 해당하는 배열 size에 맞게 배열을 생성하고 객체를 넣어 준 상태로 값을 반환하는 기능 _ 2024.05.28*/
     public BookEntity[] searchBooks(int option, String searchText) {
         // 새로운 배열을 만들기 위해서는 검색해서 찾은 도서의 사이즈를 먼저 알아야 함.
         int newArraySize = getNewArraySize(option, searchText);
 
         BookEntity[] searchBooks = new BookEntity[newArraySize];
 
-        // i를 case 안에 넣으면 option을 찾아가는 것이기 때문에, case가 1번이 아닌 경우 skip되어버림.
+        // switch문이 실행되면 입력된 option을 찾아가는 것이기 때문에 i를 case 안에 넣으면 case가 1번이 아닌 경우 skip되어버림.
         int i = 0;
 
+        // 배열 개수를 알기 위한 기능에 똑같이 if 조건이 들어 있지만 다시 들어가 있는 이유는
+        // 실제로 입력할 때 들고오는 books는 전체 리스트이기 때문에 다시 조건을 확인해서 넣어주어야 함.
         switch (option) {
             case 1: // 통합 검색
                 for(BookEntity book : books) {
@@ -132,8 +148,8 @@ public class BookRepository {
                         searchBooks[i] = book;
                         i++;
                     }
-                    break;
                 }
+                break;
             case 2: // 도서명 검색
                 for(BookEntity book : books) {
                     if(book.getBookName().contains(searchText)) {
