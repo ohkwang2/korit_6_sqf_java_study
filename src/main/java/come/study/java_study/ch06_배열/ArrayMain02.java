@@ -13,7 +13,7 @@ public class ArrayMain02 {
          */
 
         // "김준일" => 999
-        String a = "김준일";               // 9999
+        String a = "김준일";               // 999
         String b = new String("김준일");   // 200 -> 999
 
         System.out.println(a);
