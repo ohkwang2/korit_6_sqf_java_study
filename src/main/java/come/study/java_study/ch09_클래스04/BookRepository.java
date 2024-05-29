@@ -178,4 +178,35 @@ public class BookRepository {
         return searchBooks;
     }
 
+    /*  삭제할 도서의 index 찾기 기능 _ 2024.05.29*/
+    private int indexOfBookId(int bookId) {
+        // 삭제를 위한 도서의 index 찾기
+        int findIndex = -1;
+
+        for(int i = 0; i < books.length; i++) {
+            if(books[i].getBookId() == bookId) {
+                findIndex = i;
+                break;
+            }
+        }
+        return findIndex;
+    }
+
+    /*  index 기반으로 도서를 삭제 하는 기능 _ 2024.05.29*/
+    public void deleteBookByBookId(int bookId) {
+        int findIndex = indexOfBookId(bookId);
+
+        // 삭제하고 새로 담을 배열 생성
+        BookEntity[] newBooks = new BookEntity[books.length - 1];
+
+        // index 기준으로 새로운 배열에 기존 객체 대체
+        for(int i = 0; i < newBooks.length; i++) {
+            if(i < findIndex) {
+                newBooks[i] = books[i];
+                continue;
+            }
+            newBooks[i] = books[i + 1];
+        }
+        books = newBooks;
+    }
 }

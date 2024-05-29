@@ -52,8 +52,10 @@ public class BookService {
                 search();
                 break;
             case "3":
+                modify();
                 break;
             case "4":
+                remove();
                 break;
             default:
                 System.out.println("입력오류!");
@@ -72,7 +74,6 @@ public class BookService {
             // .isBlank()는 " "와 비어있는 것 모두 포괄하여 값이 비어 있는지 확인
             // .isEmpty()는 " "를 제외하고 값이 비어 있는지만 확인
             if(!value.isBlank()) {
-                // 값을 다시 입력받기 위해 continue; 실행
                 break;
             }
                 System.out.println(title+ "명은 공백일 수 없습니다. 다시 입력하세요.");
@@ -105,6 +106,7 @@ public class BookService {
 
         // 입력한 정보를 기반으로 도서 객체 1개 생성
         BookEntity book = new BookEntity(bookId, bookName, author, publisher);
+
         // 도서 등록 (기존 도서 배열에 추가)
         boookRepository.saveBook(book);
         System.out.println("새로운 도서를 등록하였습니다.");
@@ -139,7 +141,90 @@ public class BookService {
         }
         for(BookEntity book : searchBooks) {
             System.out.println(book.toString());
-            System.out.println();
         }
+    }
+
+    /*도서 삭제 기능 _ 2024.05.29*/
+    private void remove() {
+        System.out.println("[ 도서 삭제 ]");
+
+        // ID값을 불러오기 위해 기존에 만들었던 조회 기능 재활용
+        search();
+
+        // 삭제할 ID값 입력
+        System.out.print("삭제할 도서 번호 입력: ");
+        int removeBookId = scanner.nextInt();
+        scanner.nextLine();
+
+        // 입력한 ID값에 해당하는 도서 객체가 도서 배열에 있는지 확인
+        BookEntity book = boookRepository.findBookByBookId(removeBookId);
+        if(book == null) {
+            System.out.println("해당 도서 번호는 존재하지 않습니다.");
+            return;
+        }
+
+        // 도서 삭제 (신규 배열 생성 후 해당 ID값 제외하고 객체 추가)
+        boookRepository.deleteBookByBookId(removeBookId);
+        System.out.println("도서 삭제가 완료 되었습니다.");
+    }
+
+    /*도서 수정 기능 _ 2024.05.29*/
+    private void modify() {
+        System.out.println(" [도서 수정] ");
+
+        // ID값을 불러오기 위해 기존에 만들었던 조회 기능 재활용
+        search();
+
+        // 수정할 ID값 입력
+        System.out.println("수정할 도서 번호 입력: ");
+        int modifyBookId = scanner.nextInt();
+        scanner.nextInt();
+        scanner.nextLine();
+
+        // 입력한 ID값에 해당하는 도서 객체가 도서 배열에 있는지 확인
+        BookEntity book = boookRepository.findBookByBookId(modifyBookId);
+        if(book == null) {
+            System.out.println("해당 도서 번호는 존재하지 않습니다.");
+            return;
+        }
+
+        // 도서 수정 (기존 도서 배열에서 각각의 요소를 선택하여 수정할 수 있도록 switch문 활용하여 내용 수정)
+        System.out.println("<< 도서 수정 정보 입력>>");
+        for(int i = 0; i < 3; i++) {
+            String selected = null;
+            switch (i) {
+                case 0:
+                    System.out.print("도서명을 수정 하시겠습니까?(Y/N)");
+                    selected = scanner.nextLine();
+                    // .equalsIgnoreCase <- 값의 대소문자를 구분 없이 비교
+                    if(selected.equalsIgnoreCase(selected)) {
+                        String bookName = duplicateBookName();
+                        book.setBookName(bookName);
+                        break;
+                    }
+                    break;
+                case 1:
+                    System.out.print("저자명을 수정 하시겠습니까?(Y/N)");
+                    selected = scanner.nextLine();
+                    // .equalsIgnoreCase <- 값의 대소문자를 구분 없이 비교
+                    if(selected.equalsIgnoreCase(selected)) {
+                        String author = validateValue("저자");
+                        book.setAuthor(author);
+                        break;
+                    }
+                    break;
+                case 2:
+                    System.out.print("출판사명을 수정 하시겠습니까?(Y/N)");
+                    selected = scanner.nextLine();
+                    // .equalsIgnoreCase <- 값의 대소문자를 구분 없이 비교
+                    if(selected.equalsIgnoreCase(selected)) {
+                        String publisher = validateValue("출판사");
+                        book.setPublisher(publisher);
+                        break;
+                    }
+                    break;
+            }
+        }
+        System.out.println("도서 수정이 완료 되었습니다.");
     }
 }
