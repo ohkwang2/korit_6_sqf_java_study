@@ -41,6 +41,7 @@ public class ForGugudanGame {
                     System.out.println(randomdan + " X " + randomnum + "= ");
                     // 정답 입력
                     System.out.print("정답을 입력하세요 : ");
+
                     int result = scanner.nextInt();
                     scanner.nextLine();
 
