@@ -36,7 +36,7 @@ public class AccountCheck {
                 //아무것도 없는 경우 while문의 조건을 만족할 때 뒤에 내용까지 출력하고 계속해서 반복
 //                continue;   // 뒤에 내용을 출력하지 않고, while문을 계속해서 반복
 //                isRun = false;    //if문 조건을 만족할 경우 while문의 조건을 false로 바꿔줘서 반복을 멈추게 하기 위함
-//                break;    // 조건에 관계 없이 반복 종료
+                break;    // 조건에 관계 없이 반복 종료
             }
             System.out.println("아이디 또는 비밀번호가 맞지 않습니다. 다시 입력하세요");
             System.out.println();

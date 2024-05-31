@@ -1,4 +1,4 @@
-package come.study.java_study.과제.IF문;
+package come.study.java_study.과제.For;
 
 public class GugudanGameMain {
     public static void main(String[] args) {

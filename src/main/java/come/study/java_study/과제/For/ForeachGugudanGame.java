@@ -1,4 +1,4 @@
-package come.study.java_study.과제.IF문;
+package come.study.java_study.과제.For;
 
 import java.util.Random;
 import java.util.Scanner;
