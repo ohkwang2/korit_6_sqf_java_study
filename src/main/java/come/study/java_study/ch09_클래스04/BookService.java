@@ -1,5 +1,6 @@
 package come.study.java_study.ch09_클래스04;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class BookService {
@@ -16,13 +17,24 @@ public class BookService {
     /*도서 메뉴 선택 기능 _ 2024.05.28*/
     private String selectMenu() {
         //원래 배열을 입력해야 함. = 12도 인식 되기 때문
-        String menus = "1234q";
+        String[] menus = {"1", "2", "3", "4", "q"};
         String selectedMenu = null;
-        while(true) {
+
+        boolean confirmMenu = true;
+        while(confirmMenu) {
             System.out.print("메뉴 선택: ");
             selectedMenu = scanner.nextLine();
-            if(menus.contains(selectedMenu)) {
-                break;
+
+            // binarySearch : 이진탐색 (트리구조 탐색), 이진수 값 반환
+//            if(Arrays.binarySearch(menus, selectedMenu) > -1) {
+//                break;
+//            }
+
+            // 이진탐색을 하지 않을 경우 아래처럼
+            for(String menu : menus) {
+                if(menu.equals(selectedMenu)) {
+                    return selectedMenu;
+                }
             }
             System.out.println("잘못된 입력입니다. 다시 입력하세요.");
         }

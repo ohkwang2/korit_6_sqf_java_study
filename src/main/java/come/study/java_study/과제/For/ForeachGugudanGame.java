@@ -30,6 +30,7 @@ public class ForeachGugudanGame {
             int[] numberofproblemsarrays = new int[numberofproblems];
 
             // int 배열에 비어있는 값을 채우고, 구구단을 실행하는 반복
+            int count = 0;
             for (int numberofproblemsarray : numberofproblemsarrays) {
                 int randomdan = random.nextInt(9) + 1;
                 int randomnum = random.nextInt(9) + 1;
@@ -43,10 +44,18 @@ public class ForeachGugudanGame {
 
                 if (!(numberofproblemsarray == result)) {
                     System.out.println("틀렸습니다");
+                    numberofproblemsarrays[count] = result;
+                    count++;
                     continue;
                 }
                 System.out.println("정답 입니다");
+                numberofproblemsarrays[count] = result;
                 answer++;
+                count++;
+            }
+
+            for(int nums : numberofproblemsarrays) {
+                System.out.println(nums);
             }
 
             System.out.println();

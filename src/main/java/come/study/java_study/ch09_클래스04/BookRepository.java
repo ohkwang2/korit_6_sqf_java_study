@@ -1,6 +1,7 @@
 package come.study.java_study.ch09_클래스04;
 
 import java.awt.print.Book;
+import java.util.Arrays;
 
 // 저장소 -> CRUD
 public class BookRepository {
@@ -23,17 +24,21 @@ public class BookRepository {
     /* 도서 배열 확장 기능 _ 2024.05.28*/
     // 기능으로 따지자면 배열을 늘리는 기능 (해당 클래스 내에서만 쓰기 때문에 private으로 생성
     private void extendBooks() {
-        // 기본 배열보다 크기가 하나 더 큰 배열을 생성
-        BookEntity[] newBooks = new BookEntity[books.length + 1];
-
-        // 기존 배열의 정보를 새로운 배열로 모두 옮긴다. 이 때 마지막 인덱스의 값은 빈 값이다.
-        for(int i = 0; i < books.length; i++) {
-            newBooks[i] = books[i];
-        }
+//        // 기본 배열보다 크기가 하나 더 큰 배열을 생성
+//        BookEntity[] newBooks = new BookEntity[books.length + 1];
+//
+//        // 기존 배열의 정보를 새로운 배열로 모두 옮긴다. 이 때 마지막 인덱스의 값은 빈 값이다.
+//        for(int i = 0; i < books.length; i++) {
+//            newBooks[i] = books[i];
+//        }
+//
+//        // 기존의 배열의 주소가 들어있는 books 변수에 새로운 배열의 주소를 대입.
+//        books = newBooks;
+//        newBooks = null;
 
         // 기존의 배열의 주소가 들어있는 books 변수에 새로운 배열의 주소를 대입.
-        books = newBooks;
-        newBooks = null;
+        books = Arrays.copyOf(books, books.length + 1);
+
     }
 
     /* 도서 배열 마지막 인덱스 가져오기 기능 _ 2024.05.28*/

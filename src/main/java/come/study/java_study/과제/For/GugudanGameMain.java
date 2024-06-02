@@ -6,10 +6,10 @@ public class GugudanGameMain {
         ForeachGugudanGame foreachGugudanGame = new ForeachGugudanGame();
 
         // ForGugudanGame 프로그램을 실행하는 메소드
-        forGugudanGame.gameStart();
+//        forGugudanGame.gameStart();
 
         // ForeachGugudanGame 프로그램을 실행하는 메소드
-//        foreachGugudanGame.gameStart();
+        foreachGugudanGame.gameStart();
 
     }
 }

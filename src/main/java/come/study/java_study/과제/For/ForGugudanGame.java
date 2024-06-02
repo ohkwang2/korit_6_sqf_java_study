@@ -21,7 +21,8 @@ public class ForGugudanGame {
 
                 if(!(0 < numberofproblems && numberofproblems < 11)) {
                     System.out.println("문제도 제대로 읽지 않는 당신 문제풀 자격이 없습니다.");
-                    break;    // break가 있을 경우 조건을 만족할 때, 뒤에 나오는 내용을 무시하고 for문 자체를 종료
+                    break;    // break가 있을 경우 조건을 만족할 때, 뒤에 나오는 내용을 무시하고 fo
+                    // r문 자체를 종료
 //                    return; // return을 넣을 경우 반복문뿐만 아니라 현재 실행하는 메소드 자체를 빠져나감
 //                    System.out.println("문제 개수를 잘못 입력했습니다.");
 //                    System.out.println();
