@@ -5,7 +5,6 @@ public abstract class AbstractAuthority implements Authority {
 
     public AbstractAuthority() {
         role = DEFAULT_DOLRE;
-
     }
 
     // ??? 왜 생성자가 만들어지지??

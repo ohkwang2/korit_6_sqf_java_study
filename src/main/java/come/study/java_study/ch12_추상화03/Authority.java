@@ -24,4 +24,6 @@ public interface Authority {
     default void printAuthority() {
         System.out.println(DEFAULT_DOLRE);
     }
+
+
 }
